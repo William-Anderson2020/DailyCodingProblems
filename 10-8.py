@@ -39,10 +39,10 @@ def quxes(list):
             changes = True
         i+=1
     if changes == True:
-        print("Loop", list)
+        #print("Loop", list)
         quxes(list)
     else:
-        print("Return", list)
-        return list
+        #print("Return", list)
+        print("{} quxes remain in the list {}".format(len(list), list))
 
-print(quxes(['R', 'G', 'B', 'G', 'B', 'B', 'R', 'G']))
+quxes(['R', 'G', 'B', 'G', 'B', 'B', 'R', 'G'])
