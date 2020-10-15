@@ -25,13 +25,14 @@ paths = {
 In this case, the shortest valid path would be 0 -> 2 -> 4 -> 0, with a distance
 of 28.
 """
-
+bounding = "up"
 def pathFinder(elevations, paths, initPos):
     #paths[0] = cur pos
     #paths[1] = path el
     #paths[i] val = path length
     newPath = [initPos]
     bounding = "up"
+    dist = 0
     def subRoute(path, b):
         curPos = newPath[-1]
         nextPos, nextDist = [0, 0]
@@ -40,22 +41,28 @@ def pathFinder(elevations, paths, initPos):
                 if i[0] == curPos:
                     boundCheck.append(elevations[i[1]])
         if max(boundCheck) < elevations[curPos]:
+            #print("SWITCH")
             bounding = "down"
+            b = "down"
         
         for i in paths:
+            #print(b)
+            if b == "up":
+                comparator = True
+            else:
+                comparator = False
             if i[0] == curPos:
-                if b == "up":
-                    comparator = True
-                else:
-                    comparator = False
-                print(nextDist)
+                #print(nextDist, paths)
                 if (elevations[i[1]] > elevations[i[0]]) == comparator and (nextDist > paths[i] or nextDist == 0):
                     #print("FIRE")
                     nextPos, nextDist = [i[1], paths[i]]
-        return nextPos
+                    d = paths[i]
+        return [nextPos, d]
     while initPos not in newPath[1:]:
-        newPath += [subRoute(newPath, bounding)]
-    return newPath                
+        r = subRoute(newPath, bounding)
+        newPath += [r[0]]
+        dist += r[1]
+    return "The optimal path is {} at a distance of {}.".format(newPath, dist)                
 
 
 
