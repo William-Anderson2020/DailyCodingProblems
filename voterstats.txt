@@ -1,0 +1,6 @@
+angel 1
+bravo 3
+charlie 4
+delta 3
+echo 1
+foxtrox 1
