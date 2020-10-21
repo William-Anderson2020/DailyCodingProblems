@@ -16,7 +16,7 @@ with open("voterstats.txt") as f:
     duplicateVotes = []
     for vote in stats:
         vote = vote.split()
-        print(vote[1])
+        #print(vote[1])
         if vote[0] not in confirmedVoters:
             confirmedVoters.append(vote[0])
             if vote[1] not in voteStats.keys():
@@ -24,8 +24,22 @@ with open("voterstats.txt") as f:
             voteStats[vote[1]] += 1
         else:
             duplicateVotes.append(vote[0])
+    order = []
+    for i in voteStats:
+        if len(order) == 0:
+            order.append(i)
+        else:
+            for c in order:
+                cDex = order.index(c)
+                print(c)
+                if int(voteStats[i]) > int(voteStats[c]):
+                    order = order[:cDex] + [i] + order[cDex:]
+            if i not in order:
+                order.append(i)
+    #print(order)
             
-    print(voteStats, duplicateVotes)
+    #print(voteStats, duplicateVotes)
+    print("{} ({} votes), {} ({} votes), and {} ({} votes) are the front runners. {} placed fraudulent vote(s).".format(order[0], voteStats[order[0]],order[1], voteStats[order[1]],order[2], voteStats[order[2]],duplicateVotes))
             
             
             
