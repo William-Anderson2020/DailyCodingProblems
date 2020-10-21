@@ -18,7 +18,7 @@ def twoTypeLen(path):
     path.append("")
     checkedA = []
     count = 0
-    types = []
+    #types = []
     curS = []
     for t1 in path:
         if t1 not in checkedA:
@@ -35,7 +35,7 @@ def twoTypeLen(path):
                         else:
                             if subCount > count:
                                 count = subCount
-                                types = [t1,t2]
+                                #types = [t1,t2]
                             subCount = 0
                             curS = []
                     #print(aString)
